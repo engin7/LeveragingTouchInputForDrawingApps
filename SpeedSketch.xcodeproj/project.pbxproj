@@ -22,7 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07A45EBC4F0F61216BE20E65 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		6868CBAD219092F800A74FC8 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CF40806974A28F967E490099 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
 		F214544C1CFB4E23003F77B0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F224161E1D04337E003EB080 /* RingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		F280FF8E1CE04D1F00CF8D37 /* CGDrawingEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGDrawingEngine.swift; sourceTree = "<group>"; };
@@ -37,8 +39,6 @@
 		F2D0CDA61CDD82900097775C /* StrokeGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeGestureRecognizer.swift; sourceTree = "<group>"; };
 		F2D0CDA81CDD9C5F0097775C /* StrokeCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeCollection.swift; sourceTree = "<group>"; };
 		F2DE48971D022A7200C9E0DC /* CGMathExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMathExtensions.swift; sourceTree = "<group>"; };
-		F3493750F3493A8000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
-		F368E7E0F368E2F000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +52,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6585EACF2C189CC085317B45 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				07A45EBC4F0F61216BE20E65 /* SampleCode.xcconfig */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
+		EE7955AC76841138CBA28067 /* LICENSE */ = {
+			isa = PBXGroup;
+			children = (
+				CF40806974A28F967E490099 /* LICENSE.txt */,
+			);
+			name = LICENSE;
+			path = LICENSE;
+			sourceTree = "<group>";
+		};
 		F25618401CDEC7BD00C01A7C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,8 +100,8 @@
 				F2D0CD911CDD78CC0097775C /* SpeedSketch */,
 				F2D0CD901CDD78CC0097775C /* Products */,
 				F25618401CDEC7BD00C01A7C /* Frameworks */,
-				F34938F0F349395000000001 /* Configuration */,
-				F368E400F368E2B000000001 /* LICENSE */,
+				6585EACF2C189CC085317B45 /* Configuration */,
+				EE7955AC76841138CBA28067 /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,23 +140,6 @@
 			name = Controls;
 			sourceTree = "<group>";
 		};
-		F34938F0F349395000000001 /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				F3493750F3493A8000000001 /* SampleCode.xcconfig */,
-			);
-			name = Configuration;
-			sourceTree = "<group>";
-		};
-		F368E400F368E2B000000001 /* LICENSE */ = {
-			isa = PBXGroup;
-			children = (
-				F368E7E0F368E2F000000001 /* LICENSE.txt */,
-			);
-			name = LICENSE;
-			path = LICENSE;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,7 +150,6 @@
 				F2D0CD8B1CDD78CC0097775C /* Sources */,
 				F2D0CD8C1CDD78CC0097775C /* Frameworks */,
 				F2D0CD8D1CDD78CC0097775C /* Resources */,
-				D70140C0D701957000000001,
 			);
 			buildRules = (
 			);
@@ -173,6 +172,7 @@
 				TargetAttributes = {
 					F2D0CD8E1CDD78CC0097775C = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = A93A5CM278;
 						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 					};
@@ -242,7 +242,7 @@
 /* Begin XCBuildConfiguration section */
 		F2D0CD9F1CDD78CC0097775C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3493750F3493A8000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 07A45EBC4F0F61216BE20E65 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPRESSION = lossless;
@@ -305,7 +305,7 @@
 		};
 		F2D0CDA01CDD78CC0097775C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3493750F3493A8000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 07A45EBC4F0F61216BE20E65 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPRESSION = "respect-asset-catalog";
@@ -360,7 +360,7 @@
 		};
 		F2D0CDA21CDD78CC0097775C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3493750F3493A8000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 07A45EBC4F0F61216BE20E65 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -379,7 +379,7 @@
 		};
 		F2D0CDA31CDD78CC0097775C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3493750F3493A8000000001 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 07A45EBC4F0F61216BE20E65 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

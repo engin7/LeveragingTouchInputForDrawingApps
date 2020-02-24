@@ -6,7 +6,6 @@ The custom UIGestureRecognizer subclass to capture strokes.
 */
 
 import UIKit
-import UIKit.UIGestureRecognizerSubclass
 
 /// A custom gesture recognizer that receives touch events and appends data to the stroke sample.
 /// - Tag: StrokeGestureRecognizer
@@ -179,7 +178,8 @@ class StrokeGestureRecognizer: UIGestureRecognizer {
                         if strongSelf.state == .possible {
                             strongSelf.state = .began
                         }
-                })
+                    }
+                )
             }
         }
         if append(touches: touches, event: event) {

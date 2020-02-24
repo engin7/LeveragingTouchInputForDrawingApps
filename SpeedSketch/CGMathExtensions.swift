@@ -12,12 +12,7 @@ import CoreGraphics
 
 extension CGRect {
     var center: CGPoint {
-        get {
-            return origin + CGVector(dx: width, dy: height) / 2.0
-        }
-        set {
-            origin = newValue - CGVector(dx: width, dy: height) / 2
-        }
+        return origin + CGVector(dx: width, dy: height) / 2.0
     }
 }
 

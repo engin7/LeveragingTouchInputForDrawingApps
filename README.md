@@ -33,7 +33,8 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                     if strongSelf.state == .possible {
                         strongSelf.state = .began
                     }
-            })
+                }
+            )
         }
     }
     if append(touches: touches, event: event) {
