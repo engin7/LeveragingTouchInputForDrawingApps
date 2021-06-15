@@ -64,6 +64,8 @@ class CanvasMainViewController: UIViewController {
 
         setupDrawingTools()
         setupPencilUI()
+        // color picker
+        configureStackViews()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -75,6 +77,15 @@ class CanvasMainViewController: UIViewController {
         return true
     }
 
+    func configureStackViews() {
+        bottomColorButton.layer.cornerRadius = 16
+        colorPickerBackgroundView.layer.cornerRadius = 22
+        colorPickerBackgroundView.layer.shadowColor = UIColor.gray.cgColor
+        colorPickerBackgroundView.layer.shadowOpacity = 0.8
+        colorPickerBackgroundView.layer.shadowOffset = .zero
+        colorPickerStackView.subviews.forEach { $0.layer.cornerRadius = 16 }
+    }
+    
     /// A helper method that creates stroke gesture recognizers.
     /// - Tag: setupStrokeGestureRecognizer
     func setupStrokeGestureRecognizer(isForPencil: Bool) -> StrokeGestureRecognizer {
@@ -223,6 +234,184 @@ class CanvasMainViewController: UIViewController {
         pencilMode = false
     }
 
+    
+    // MARK: - Color Picker Controls
+
+    @IBOutlet var colorPickerStackView: UIStackView!
+    @IBOutlet var colorPickerBackgroundView: UIView!
+    
+    @IBAction func changeColor(sender: AnyObject) {
+        guard let button = sender as? UIButton else {
+            return
+        }
+        switch button.tag {
+        case 0:
+            if !colorPickerStackView.isHidden {
+                drawingColor = drawColor.blue
+            }
+        case 1:
+            drawingColor = drawColor.red
+          
+        case 2:
+            drawingColor = drawColor.orange
+        case 3:
+            drawingColor = drawColor.green
+        case 4:
+            drawingColor = drawColor.cyan
+        case 5:
+            drawingColor = drawColor.yellow
+        case 6:
+            drawingColor = drawColor.magenta
+        default:
+            print("Unknown color")
+            return
+        }
+        animateColorPicker()
+       // changeFillColor()
+    }
+    
+    @IBOutlet var bottomColorButton: UIButton!
+    @IBOutlet var colorPickerHeight: NSLayoutConstraint!
+
+    func animateColorPicker() {
+        if colorPickerHeight.constant == 288 {
+            shrinkColorPicker()
+        } else {
+            expandColorPicker()
+        }
+    }
+
+    // TODO: - Refactor these functions
+    func expandColorPicker() {
+        // to change bottom image color
+        let origImage = bottomColorButton.imageView?.image
+        let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+
+        colorPickerHeight.constant = 288
+        colorPickerStackView.subviews.forEach { $0.alpha = 0.01 }
+
+        UIView.animate(
+            withDuration: 0.15, delay: 0.1, options: .curveEaseOut,
+            animations: {
+                self.view.layoutIfNeeded()
+            })
+        UIView.animate(
+            withDuration: 0.3, delay: 0.2, options: .curveEaseOut,
+            animations: { [self] in
+                colorPickerStackView.subviews.forEach { $0.isHidden = false }
+                colorPickerStackView.subviews.forEach { $0.alpha = 1.0 }
+                colorPickerStackView.subviews.forEach {
+                    switch drawingColor {
+                    case .magenta:
+                        if $0.tag == 6 {
+                            $0.layer.borderWidth = 3
+                            $0.layer.borderColor = UIColor.gray.cgColor
+                        } else {
+                            $0.layer.borderWidth = 0
+                        }
+                    case .yellow:
+                        if $0.tag == 5 {
+                            $0.layer.borderWidth = 3
+                            $0.layer.borderColor = UIColor.gray.cgColor
+                        } else {
+                            $0.layer.borderWidth = 0
+                        }
+                    case .cyan:
+                        if $0.tag == 4 {
+                            $0.layer.borderWidth = 3
+                            $0.layer.borderColor = UIColor.gray.cgColor
+                        } else {
+                            $0.layer.borderWidth = 0
+                        }
+                    case .green:
+                        if $0.tag == 3 {
+                            $0.layer.borderWidth = 3
+                            $0.layer.borderColor = UIColor.gray.cgColor
+                        } else {
+                            $0.layer.borderWidth = 0
+                        }
+                    case .orange:
+                        if $0.tag == 2 {
+                            $0.layer.borderWidth = 3
+                            $0.layer.borderColor = UIColor.gray.cgColor
+                        } else {
+                            $0.layer.borderWidth = 0
+                        }
+                    case .red:
+                        if $0.tag == 1 {
+                            $0.layer.borderWidth = 3
+                            $0.layer.borderColor = UIColor.gray.cgColor
+                        } else {
+                            $0.layer.borderWidth = 0
+                        }
+                    case .blue:
+                        print("not inside this stackView")
+                    }
+                }
+                colorPickerStackView.isHidden = false
+                self.view.layoutIfNeeded()
+
+                bottomColorButton.setImage(tintedImage, for: .normal)
+                bottomColorButton.tintColor = drawColor.blue.associatedColor.withAlphaComponent(1.0)
+                bottomColorButton.layer.borderWidth = 0
+
+            })
+    }
+
+    func shrinkColorPicker() {
+        // to change bottom image color
+        let origImage = bottomColorButton.imageView?.image
+        let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+        colorPickerHeight.constant = 48
+        UIView.animate(
+            withDuration: 0.3, delay: 0.1, options: .curveEaseOut,
+            animations: {
+                self.view.layoutIfNeeded()
+            })
+        UIView.animate(
+            withDuration: 0.2, delay: 0.1, options: .curveEaseOut,
+            animations: { [self] in
+                colorPickerStackView.subviews.forEach { $0.isHidden = true }
+                colorPickerStackView.isHidden = true
+
+                bottomColorButton.setImage(tintedImage, for: .normal)
+                bottomColorButton.tintColor = drawingColor.associatedColor.withAlphaComponent(1.0)
+                bottomColorButton.layer.borderWidth = 3
+                bottomColorButton.layer.cornerRadius = 16
+                bottomColorButton.layer.borderColor = UIColor.gray.cgColor
+
+            })
+    }
+ 
+    var colorInfo = UIColor()
+    private var drawingColor: drawColor = drawColor.blue {
+        didSet {
+               colorInfo = drawingColor.associatedColor
+         }
+    }
+    
+    enum drawColor {
+        case magenta
+        case yellow
+        case cyan
+        case green
+        case orange
+        case red
+        case blue
+
+        var associatedColor: UIColor {
+            switch self {
+            case .magenta: return UIColor(red: 157 / 255, green: 31 / 255, blue: 129 / 255, alpha: 0.250)
+            case .yellow: return UIColor(red: 249 / 255, green: 253 / 255, blue: 65 / 255, alpha: 0.250)
+            case .cyan: return UIColor(red: 65 / 255, green: 255 / 255, blue: 253 / 255, alpha: 0.250)
+            case .green: return UIColor(red: 54 / 255, green: 199 / 255, blue: 73 / 255, alpha: 0.250)
+            case .orange: return UIColor(red: 248 / 255, green: 152 / 255, blue: 45 / 255, alpha: 0.250)
+            case .red: return UIColor(red: 252 / 255, green: 96 / 255, blue: 90 / 255, alpha: 0.250)
+            case .blue: return UIColor(red: 58 / 255, green: 155 / 255, blue: 251 / 255, alpha: 0.250)
+            }
+        }
+    }
+    
 }
 
 // MARK: - UIGestureRecognizerDelegate
