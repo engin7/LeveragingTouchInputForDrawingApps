@@ -103,6 +103,7 @@ class CanvasMainViewController: UIViewController {
 
         for (index, ringView) in leftRingControl.ringViews.enumerated() {
             let option = StrokeViewDisplayOptions.allCases[index]
+            // sets the input mode here. when actionClosure called we set the display options here
             ringView.actionClosure = { self.cgView.displayOptions = option }
             let imageView = UIImageView(frame: ringView.bounds.insetBy(dx: ringImageInset, dy: ringImageInset))
             imageView.image = UIImage(named: option.description)
@@ -122,6 +123,7 @@ class CanvasMainViewController: UIViewController {
     }
 
     /// Handles the gesture for `StrokeGestureRecognizer`.
+    /// This is the drawing mechanism
     /// - Tag: strokeUpdate
     @objc
     func strokeUpdated(_ strokeGesture: StrokeGestureRecognizer) {

@@ -83,7 +83,7 @@ class RingControl: UIView {
             view.stateClosures[.locationOrigin] = locationNormalGenerator(view)
             self.addSubview(view)
             ringViews.append(view)
-
+            // calls the closure to change draw mode
             let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap(_:)))
             view.addGestureRecognizer(tapRecognizer)
         }
